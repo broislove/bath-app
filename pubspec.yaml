@@ -1,0 +1,4 @@
+name: bath_app
+dependencies:
+  flutter:
+    path: ../../packages/flutter
