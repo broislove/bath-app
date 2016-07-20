@@ -8,7 +8,7 @@ class Tab {
   final String label;
   final Widget viewWidget;
 }
-
+ // << HUINYA!!!
 Widget statsW = new Center(
   child: new Card(
     child: new Center(
@@ -20,6 +20,8 @@ Widget statsW = new Center(
 Widget eventsW = new Block(
   children: prepareEvents(kAllBathEvents)
 );
+
+// >>
 
 final List<Tab> kTabs = <Tab>[
   new Tab(label: 'EVENTS', viewWidget: eventsW),

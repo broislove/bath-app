@@ -1,2 +1,4 @@
 name: bath_app
 uses-material-design: true
+assets:
+  - assets/flutter_logo.png

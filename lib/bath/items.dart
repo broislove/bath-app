@@ -17,6 +17,8 @@ class BathEvent extends StatelessWidget {
   }
 }
 
+// << PEREHUYARIT'! 
+
 List<Widget> prepareEvents (List<BathEvent> allBathEvents)
 {
   final List<Widget> _events = <Widget>[];

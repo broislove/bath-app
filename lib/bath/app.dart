@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 
+final ThemeData appTheme = new ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: Colors.teal
+);
+
 class BathApp extends StatefulWidget {
   BathApp({ Key key }) : super(key: key);
 
@@ -14,6 +19,7 @@ class BathAppState extends State<BathApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'BathApp',
+      theme: appTheme,
       home: new BathHome()
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'tabs.dart';
-//import 'dialogues.dart';
+import 'dialogues.dart';
 
 
 class BathHome extends StatefulWidget {
@@ -31,7 +31,17 @@ class BathHomeState extends State<BathHome> {
             actions: <Widget>[new IconButton(
                 icon: new Icon(Icons.info),
                 tooltip: 'About',
-                onPressed: null
+                onPressed: () {
+                   showAboutDialog(
+                     context: context,
+                     applicationName: kAppName,
+                     applicationVersion: kAppVer,
+                     applicationIcon: kAppImage,
+                     applicationLegalese: kAppLicense,
+                     children: <Widget>[ new AboutW() ]
+                   );
+                }
+
             )],
             bottom: new TabBar<Tab>(
               labels: new Map<Tab, TabLabel>.fromIterable(kTabs, value: (Tab tab) {
