@@ -17,36 +17,6 @@ class BathEvent extends StatelessWidget {
   }
 }
 
-// << PEREHUYARIT'! 
-
-List<Widget> prepareEvents (List<BathEvent> allBathEvents)
-{
-  final List<Widget> _events = <Widget>[];
-
-  bool currentIsEnded;
-
-  for(BathEvent bathEvent in allBathEvents){
-    if (bathEvent.isEnded != currentIsEnded ){
-      if (currentIsEnded != null)
-        _events.add(new Divider());
-      _events.add(
-        new Container(
-          height: 48.0,
-          padding: const EdgeInsets.only(left: 16.0),
-          child: new Align(
-            alignment: FractionalOffset.centerLeft,
-            child: new Text( bathEvent.isEnded ? 'Past' : 'Upcoming' )
-          )
-        )
-      );
-      currentIsEnded = bathEvent.isEnded;
-    }
-    _events.add(bathEvent);
-  }
-
-  return _events;
-}
-
 final List<BathEvent> kAllBathEvents = <BathEvent>[
   new BathEvent(
     id: 211,
