@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 
-class BathEvent extends StatelessWidget {
-  BathEvent({ this.id, this.title, this.isEnded });
+class Event {
+  Event({this.id, this.title, this.date, this.visitors});
 
   final int id;
   final String title;
-  final bool isEnded;
+  final String date;
+  final List<int> visitors;
+}
+
+class BathEvent extends StatelessWidget {
+  BathEvent({ this.id, this.title, this.date, this.routeName, this.buildRoute});
+
+  final int id;
+  final String title;
+  final String date;
+
+  final String routeName;
+  final WidgetBuilder buildRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +28,30 @@ class BathEvent extends StatelessWidget {
       title: new Text('S${id.toString().substring(0,1)} Ep' +
        '${id.toString().substring(1,3)}'), //, style: titleStyle
       subtitle: new Text(title),
-      onTap: null
+      onTap: (){
+        Navigator.pushNamed(context, routeName);
+      }
+    );
+  }
+}
+
+class BathEventDetails extends StatelessWidget{
+  BathEventDetails({this.id});
+  final int id;
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      //key: _scaffoldKey,
+      appBar: new AppBar(
+        title: new Text(id.toString())
+      ),
+      body: new Center(
+        child: new Card(
+          child: new Center(
+            child: new Text(id.toString())
+          )
+        )
+      )
     );
   }
 }
@@ -25,18 +60,21 @@ final List<BathEvent> kAllBathEvents = <BathEvent>[
   new BathEvent(
     id: 212,
     title: 'The end of Anarchy',
-    isEnded: true
+    routeName: '212',
+    buildRoute: (BuildContext context) => new BathEventDetails(id: 212)
   ),
   new BathEvent(
     id: 211,
     title: 'Future is Unknown',
-    isEnded: true
+    routeName: '211',
+    buildRoute: (BuildContext context) => new BathEventDetails(id: 211)
   ),
   new BathEvent(
     id: 210,
     title: 'Bottle & Egg',
-    isEnded: true
-  ),
+    routeName: '210',
+    buildRoute: (BuildContext context) => new BathEventDetails(id: 210)
+  ) /*,
   new BathEvent(
     id: 209,
     title: 'Duck Tales',
@@ -81,5 +119,5 @@ final List<BathEvent> kAllBathEvents = <BathEvent>[
     id: 201,
     title: 'Happy New Year!',
     isEnded: true
-  )
+  )*/
 ];
