@@ -9,8 +9,12 @@ class BathEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //final ThemeData themeData = Theme.of(context);
+    //final TextStyle titleStyle = themeData.textTheme.body2.copyWith(color: themeData.primaryColor);
+
     return new ListItem(
-      title: new Text(id.toString()),
+      title: new Text('S${id.toString().substring(0,1)} Ep' +
+       '${id.toString().substring(1,3)}'), //, style: titleStyle
       subtitle: new Text(title),
       onTap: null
     );
@@ -19,9 +23,14 @@ class BathEvent extends StatelessWidget {
 
 final List<BathEvent> kAllBathEvents = <BathEvent>[
   new BathEvent(
+    id: 212,
+    title: 'The end of Anarchy',
+    isEnded: true
+  ),
+  new BathEvent(
     id: 211,
     title: 'Future is Unknown',
-    isEnded: false
+    isEnded: true
   ),
   new BathEvent(
     id: 210,
