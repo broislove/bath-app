@@ -16,9 +16,10 @@ class BathEvent {
 }
 
 class BathEventsListItem extends StatelessWidget {
-  BathEventsListItem({ this.event });
+  BathEventsListItem({ this.event, this.onPressed });
 
   final BathEvent event;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +30,12 @@ class BathEventsListItem extends StatelessWidget {
       title: new Text('S${event.id.toString().substring(0,1)} Ep' +
        '${event.id.toString().substring(1,3)}'), //, style: titleStyle
       subtitle: new Text(event.title),
-      onTap: (){
-        Navigator.push(context, new MaterialPageRoute<DialogActions>(
-          builder: (BuildContext context) => new BathEventDetails(event)
-        ));
-      }
+      onTap: //(){
+          //Navigator.push(context, new MaterialPageRoute<DialogActions>(
+          //builder: (BuildContext context) => new BathEventDetails(event)
+          //));
+          onPressed
+      //}
     );
   }
 }
@@ -43,8 +45,6 @@ class BathEventsList extends StatefulWidget{
 
   @override
   BathEventsListState createState() => new BathEventsListState();
-
-  addEvent(){}
 }
 
 class BathEventsListState extends State<BathEventsList>{
@@ -71,7 +71,7 @@ class BathEventsListState extends State<BathEventsList>{
          jsonResources.forEach((j) {
            BathEvent b = new BathEvent(id: j['id'], title: j['title']);
            bathEventsListItems.add(
-             new BathEventsListItem(event: b)
+             new BathEventsListItem(event: b, onPressed: (){addEvent();})
            );
          });
       });
@@ -89,7 +89,7 @@ class BathEventsListState extends State<BathEventsList>{
   */
 
   addEvent() {
-    print('ololo');
+    //print('ololo');
     setState(() {
       bathEventsListItems.add(
         new BathEventsListItem(
@@ -97,6 +97,7 @@ class BathEventsListState extends State<BathEventsList>{
         )
       );
     });
+    //print(bathEventsListItems.length);
   }
 
   @override
@@ -107,7 +108,7 @@ class BathEventsListState extends State<BathEventsList>{
       );
     } else {
       return new Block(
-        children: bathEventsListItems
+        children: bathEventsListItems.reversed.toList()
       );
     }
   }

@@ -15,7 +15,7 @@ class BathHome extends StatefulWidget {
 class BathHomeState extends State<BathHome> {
   final Key _homeKey = new ValueKey<String>("BathApp Home"); //???
   Tab selectedTab;
-  Widget bathEventsList;
+  //Widget bathEventsList;
 
   @override
   void initState() {

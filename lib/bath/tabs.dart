@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'events.dart';
 
-BathEventsList bathEventList = new BathEventsList();
-
 class Tab {
   Tab({ this.label, this.viewWidget, this.icon, this.tooltip, this.action });
 
@@ -32,12 +30,12 @@ class TabStats extends StatelessWidget{
   }
 }
 
-final List<Tab> tabs = <Tab>[
+/*final*/ List<Tab> tabs = <Tab>[
   new Tab(
     label: 'EVENTS',
-    viewWidget: bathEventList,
+    viewWidget: new BathEventsList(),
     icon: Icons.add,
-    action:  bathEventList.addEvent(),
+  //  action:  bathEventList.addEvent(),
     tooltip: 'Add new event'
   ),
   new Tab(
