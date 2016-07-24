@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 
+import 'events.dart';
+
 final String kAppName = 'BathApp!';
 final String kAppVer = '0.1 Prewiew';
 final String kAppLicense = '© 2016 Bro';
@@ -48,6 +50,108 @@ class AboutW extends StatelessWidget{
               text: "."
             )
           ]
+        )
+      )
+    );
+  }
+}
+
+enum DialogActions {
+  cancel,
+  discard,
+  save,
+}
+
+class BathEventDetails extends StatelessWidget{
+  BathEventDetails(this.event);
+  BathEvent event;
+  
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      //key: _scaffoldKey,
+      appBar: new AppBar(
+        title: new Text(event.id.toString())
+      ),
+      body: new Center(
+        child: new Card(
+          child: new Center(
+            child: new Text(event.id.toString())
+          )
+        )
+      )
+    );
+  }
+}
+
+class NewBathEventDialog extends StatefulWidget{
+  @override
+  NewBathEventDialogState createState() => new NewBathEventDialogState();
+}
+
+class NewBathEventDialogState extends State<NewBathEventDialog>{
+  bool _saveNeeded = true;
+
+  void handleDismissButton(BuildContext context) {
+    if (!_saveNeeded) {
+      Navigator.pop(context, null);
+      return;
+    }
+
+    final ThemeData theme = Theme.of(context);
+    final TextStyle dialogTextStyle = theme.textTheme.subhead.copyWith(
+      color: theme.textTheme.caption.color
+    );
+
+    showDialog(
+      context: context,
+      child: new Dialog(
+        content: new Text(
+          'Discard new event?',
+          style: dialogTextStyle
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            child: new Text('CANCEL'),
+            onPressed: () { Navigator.pop(context, DialogActions.cancel); }
+          ),
+          new FlatButton(
+            child: new Text('DISCARD'),
+            onPressed: () {
+              Navigator.of(context)
+                ..pop(DialogActions.discard) // pop the cancel/discard dialog
+                ..pop(); // pop this route
+            }
+          )
+        ]
+      )
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return new Scaffold(
+      //key: _scaffoldKey,
+      appBar: new AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.clear),
+          onPressed: () { handleDismissButton(context); }
+        ),
+        title: new Text('New Event'),
+        actions: <Widget> [
+          new FlatButton(
+            child: new Text('SAVE', style: theme.textTheme.body1.copyWith(color: Colors.white)),
+            onPressed: () { Navigator.pop(context, DialogActions.save); }
+          )
+        ]
+      ),
+      body: new Center(
+        child: new Card(
+          child: new Center(
+            child: new Text('New Event')
+          )
         )
       )
     );

@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'items.dart';
+import 'events.dart';
+
+BathEventsList bathEventList = new BathEventsList();
 
 class Tab {
-  Tab({ this.label, this.viewWidget});
+  Tab({ this.label, this.viewWidget, this.icon, this.tooltip, this.action });
 
   final String label;
+  final String tooltip;
   final Widget viewWidget;
-}
+  final IconData icon;
+  final VoidCallback action;
 
-class TabEvents extends StatelessWidget{
-  TabEvents(this.events);
-
-  final List<BathEvent> events;
-
-  @override
-  Widget build(BuildContext context) {
-    return new Block(
-      children: events
-    );
-  }
+  bool get fabDefined => icon != null;
+  Icon get fabIcon => new Icon(icon);
+  String get toolTip => tooltip;
+  VoidCallback get fabAction => action;
 }
 
 class TabStats extends StatelessWidget{
@@ -35,7 +32,16 @@ class TabStats extends StatelessWidget{
   }
 }
 
-final List<Tab> kTabs = <Tab>[
-  new Tab(label: 'EVENTS', viewWidget: new TabEvents(kAllBathEvents)),
-  new Tab(label: 'STATS', viewWidget: new TabStats()),
+final List<Tab> tabs = <Tab>[
+  new Tab(
+    label: 'EVENTS',
+    viewWidget: bathEventList,
+    icon: Icons.add,
+    action:  bathEventList.addEvent(),
+    tooltip: 'Add new event'
+  ),
+  new Tab(
+    label: 'STATS',
+    viewWidget: new TabStats()
+  )
 ];
