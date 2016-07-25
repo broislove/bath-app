@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 
 import 'events.dart';
 
-final String kAppName = 'BathApp!';
-final String kAppVer = '0.1 Prewiew';
+final String kAppName = 'One Two Mraz';
+final String kAppVer = '0.2 Prewiew';
 final String kAppLicense = '© 2016 Bro';
 final kAppImage = new AssetImage('assets/flutter_logo.png');
 
@@ -36,7 +36,7 @@ class AboutW extends StatelessWidget{
             new TextSpan(
               style: textStyle,
               text:
-              "BathApp is a simple Andriod app to keep Tuesday Bath's stats in the cloud."
+              "One Two Mraz is a simple Andriod app to select Mraz' in bath every Tuesday."
               "\n\nWritten on Dart using Flutter framework."
               "\nTo see the source code, please visit the "
             ),
@@ -65,7 +65,7 @@ enum DialogActions {
 class BathEventDetails extends StatelessWidget{
   BathEventDetails(this.event);
   BathEvent event;
-  
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

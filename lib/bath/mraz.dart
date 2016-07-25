@@ -1,5 +1,30 @@
 import "package:flutter/material.dart";
+
 import "dart:math" show Random;
+
+import 'dialogues.dart';
+
+final List<String> guestList = [
+  "Paul Glotov",
+  "Anton Ryadinsky",
+  "Bro Chislov",
+  "Kest Man'ko",
+  "Gleb Chernov",
+  "Ruslan Sokolov",
+  "Timur Irgalin",
+  "Paul Grivin",
+  "Kostya Fyodorov",
+  "Max Vinogradov",
+  "Alex Sterinovich",
+  "Peter Kropotin",
+  "Fomich Fomin",
+  "Max Khohrin",
+  "Marat Uramaev",
+  "Tema Razglyadny",
+  "Vova Egorov",
+  "Serge Nekrashevich",
+  "Kirill Khohrin"
+];
 
 typedef void GuestListChangedCallback(String guest, bool isPresent);
 
@@ -44,10 +69,10 @@ class MrazDialogue extends StatelessWidget{
       title: new Text("Today's Winner is:"),
       content: new Text("${mraz.toUpperCase()}"),
       actions: <Widget>[
-        new FlatButton(
-          child: new Text('RETRY'),
-          onPressed: () { Navigator.pop(context, MrazDialogAction.retry); }
-        ),
+        //new FlatButton(
+        //  child: new Text('RETRY'),
+        //  onPressed: () { Navigator.pop(context, MrazDialogAction.retry); }
+        //),
         new FlatButton(
           child: new Text('OK'),
           onPressed: () { Navigator.pop(context, MrazDialogAction.ok); }
@@ -95,7 +120,7 @@ class TabMrazState extends State<TabMraz> {
 
       widgetList.insert(0,
         new RaisedButton(
-          onPressed: (){_selectMraz();},
+          onPressed: (){null;},//(){_selectMraz();},
           child: new Text("Select Mraz' from ${_presentGuests.length} guests")
         )
       );
@@ -111,7 +136,7 @@ class TabMrazState extends State<TabMraz> {
 
       widgetList.insert(0,
         new RaisedButton(
-          onPressed: null,
+          onPressed: (){null;},
           child: new Text("$mraz, ti Mraz'!")
         )
       );
@@ -143,8 +168,45 @@ class TabMrazState extends State<TabMraz> {
 
   @override
   Widget build(BuildContext context) {
-    return new Block(
-      children: _generateBlock(mrazSelected)
+    return new Scaffold(
+        //key: _homeKey,
+        appBar: new AppBar(
+            title: new Text('One Two Mraz'),
+            actions: <Widget>[
+              new IconButton(
+                icon: new Icon(Icons.clear),
+                tooltip: 'Try one more time',
+                onPressed: () {
+                  setState(() {
+                    _presentGuests.clear();
+                    mrazSelected = false;
+                  });
+                }),
+              new IconButton(
+                icon: new Icon(Icons.info),
+                tooltip: 'About',
+                onPressed: () {
+                   showAboutDialog(
+                     context: context,
+                     applicationName: kAppName,
+                     applicationVersion: kAppVer,
+                     applicationIcon: kAppImage,
+                     applicationLegalese: kAppLicense,
+                     children: <Widget>[ new AboutW() ]
+                   );
+                }
+            )
+          ]
+        ),
+        body: new Block( //new TabMraz(guests: guestList),
+          children: _generateBlock(mrazSelected)
+        ),
+        floatingActionButton: new FloatingActionButton(
+            tooltip: "Select Mraz'!",
+            child: new Icon(Icons.account_box),
+            onPressed: (){_selectMraz();}//null//selectedTab.fabAction
+        )
     );
+    //);
   }
 }

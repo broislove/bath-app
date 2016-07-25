@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
+//import 'home.dart';
+import 'mraz.dart';
 
 final ThemeData appTheme = new ThemeData(
   brightness: Brightness.light,
@@ -26,11 +27,12 @@ class BathAppState extends State<BathApp> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'BathApp',
+      title: 'OneTwoMraz',
       theme: appTheme,
       //routes: bathRoutes,
       //showPerformanceOverlay: true,
-      home: new BathHome()
+      home: //new BathHome()
+        new TabMraz(guests: guestList)
     );
   }
 }

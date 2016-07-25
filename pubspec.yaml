@@ -1,4 +1,4 @@
-name: bath_app
+name: OneTwoMraz
 dependencies:
   flutter:
     path: ../../flutter/packages/flutter
